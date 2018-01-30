@@ -6,19 +6,23 @@
 
     LunchCheckController.$inject = ['$scope'];
     function LunchCheckController($scope) {
-        $scope.lunchCheck=0;
         $scope.isValid=true;
         $scope.evaluationMessage = "";
-        $scope.parsed = [];
 
-        // $scope.inputParser = function () {
-        //     var parsed = $scope.lunch ? $scope.lunch.split(',') : [];
-        //     $scope.lunchCheck = parsed.length;
-        // };
         function inputParser(input) {
-            var parsed = input ? input.split(',') : [];
-            $scope.lunchCheck = parsed.length;
-            $scope.parsed = parsed;
+            $scope.lunchCheck = 0;
+            if (input) {                
+                var parsed = input.split(',');
+                //remove spaces between items
+                parsed = parsed.map((e) => {
+                    return e.replace(/\s/g, '');
+                })
+                //remove empty options
+                .filter((e) => {
+                    return e !== '';
+                });
+                $scope.lunchCheck = parsed.length;
+            }
         };
 
         $scope.getEvaluation = function() {
@@ -32,7 +36,7 @@
                     $scope.isValid = true;
                 }
             } else {
-                $scope.evaluationMessage = "Pleasea enter data first";
+                $scope.evaluationMessage = "Please enter data first";
                 $scope.isValid = false;
             }
             

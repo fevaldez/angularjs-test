@@ -15,16 +15,18 @@
      <h1>Lunch Checker</h1>
          <div class="form-group"
              ng-class="isValid ? 'has-success' : 'has-error'">
-             <input id="lunch-menu" type="text"
+          <input id="lunch-menu" type="text"
              placeholder="list comma separated dishes you usually have for lunch"
              class="form-control"
              ng-model="lunch">
          </div>
          <div class="form-group">
              <button class="btn btn-default" ng-click="getEvaluation();">Check If Too Much</button>
+             <span id="evalMessage" class="help-block">This is NOT consider an empty item, i.e., ", ," as an item towards to the count</span>
          </div>
-         <div class="form-group message">
-           {{evaluationMessage}}
+         <div class="form-group message"
+             ng-class="isValid ? 'has-success' : 'has-error'">
+            <span id="evalMessage" class="help-block">{{evaluationMessage}}</span>
          </div>
    </div>
 
