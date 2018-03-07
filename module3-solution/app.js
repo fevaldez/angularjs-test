@@ -15,8 +15,8 @@
         
         menu.search = function () {
             const promise = MenuSearchService.getMatchedMenuItems(menu.searchTerm);
-            promise.then(()=>{
-                menu.found = MenuSearchService.results;
+            promise.then((result)=>{
+                menu.found = result;
             });
         }
     };
@@ -27,26 +27,15 @@
         var errorHandling = (x) => console.log(x);
         service.results = [];
 
-        function filterResults(response, searchTerm) {
-            var promise = response;
-            return promise.then(function(array) {
-                if (array && array.data) {
-                    const data = array.data.menu_items;
-                    service.results = data.filter((item) => {
-                        return item.name.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1;
-                    });
-                }
-            })
-            .catch(errorHandling);
-        };
-
         service.getMatchedMenuItems = function (searchTerm) {
-            var response = $http({
-            method: "GET",
-            url: (ApiBasePath + "/menu_items.json")
-            });
-
-            return response.then(filterResults(response, searchTerm)).catch(errorHandling);
+            return $http({
+                method: "GET",
+                url: (ApiBasePath + "/menu_items.json")
+            }).then((result) => {
+                return result.data.menu_items.filter((item) => {
+                    return item.name.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1;
+                });
+            }).catch(errorHandling);
         };
     }
 
