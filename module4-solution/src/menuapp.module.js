@@ -1,5 +1,7 @@
 (function() {
-angular.module('MenuApp', ['Data']);
+'use strict';
+
+angular.module('MenuApp', ['ui.router', 'Data']);
 
 angular.module('MenuApp')
 .config(RoutesConfig);
@@ -12,12 +14,11 @@ function RoutesConfig($stateProvider, $urlRouterProvider) {
 
   // *** Set up UI states ***
   $stateProvider
-
   // Home page
   .state('home', {
     url: '/',
     template: '<h1>HOME HSH</h1>'
-  })
+  });
 }
 
 })();
