@@ -14,3 +14,11 @@ div.tabs {
 .activeTab {
   font-weight: bold;
 }
+
+.box {
+  display: inline-block;
+  width: auto;
+  min-width: 200px;
+  max-width: 400px;
+  margin: 1em;
+}
