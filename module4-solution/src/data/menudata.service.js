@@ -13,7 +13,7 @@ function MenuDataService($http, $timeout, ApiBasePath) {
         return $http.get(`${ApiBasePath}/categories.json`).then(function (response) {
             return response.data;
         });
-    }, 300);
+    }, 0);
     };
 
     service.getItemsForCategory = function(categoryShortName) {
@@ -21,7 +21,7 @@ function MenuDataService($http, $timeout, ApiBasePath) {
         return $http.get(`${ApiBasePath}/menu_items.json?category=${categoryShortName}`).then(function (response) {
             return response.data;
         })
-    }, 500);
+    }, 0);
     };
 }
 
